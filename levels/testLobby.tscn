@@ -20,7 +20,7 @@ tonemap_mode = 2
 [node name="world" type="Node3D" unique_id=1088856976]
 
 [node name="CharacterBody3D" parent="." unique_id=1827998086 instance=ExtResource("1_ixsrm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8881612, -3.742589)
+transform = Transform3D(0.5812702, 0, -0.8137106, 0, 1, 0, 0.8137106, 0, 0.5812702, -3.0207295, 0.8881612, -2.9908707)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=808085213]
 environment = SubResource("Environment_e14s6")

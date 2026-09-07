@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://bkiayhclwm1r0"]
 
 [ext_resource type="Script" uid="uid://25nq16q60ngc" path="res://player/player.gd" id="1_oul6g"]
-[ext_resource type="ArrayMesh" uid="uid://ctl6c5nqw0fwh" path="res://player/LynxNova.obj" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://d34udxixyd48w" path="res://player/camera.gd" id="2_rkbax"]
+[ext_resource type="ArrayMesh" uid="uid://ctl6c5nqw0fwh" path="res://player/models/LynxNova.obj" id="2_yw30f"]
+[ext_resource type="ArrayMesh" uid="uid://c62f8yftlwh15" path="res://player/models/aeromorph.obj" id="4_yw30f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -18,16 +19,27 @@ radius = 0.1
 collision_layer = 2
 script = ExtResource("1_oul6g")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1341272765]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5744895, 0)
+omni_range = 5.5
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=561094931]
 shape = SubResource("CapsuleShape3D_sh265")
 
 [node name="LynxNova" type="MeshInstance3D" parent="." unique_id=2104786510]
 transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, 0, -0.90204513, 0)
-mesh = ExtResource("2_g1dw6")
+mesh = ExtResource("2_yw30f")
 
-[node name="camera" type="Node3D" parent="." unique_id=591680049 node_paths=PackedStringArray("character", "edge_spring_arm", "rear_spring_arm", "camera")]
+[node name="Aeromorph" type="MeshInstance3D" parent="." unique_id=1964226225]
+transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, 0, -0.9937495, 0)
+mesh = ExtResource("4_yw30f")
+
+[node name="camera" type="Node3D" parent="." unique_id=591680049 node_paths=PackedStringArray("LynxMesh", "AeroMesh", "charLight", "character", "edge_spring_arm", "rear_spring_arm", "camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516, 0.144)
 script = ExtResource("2_rkbax")
+LynxMesh = NodePath("../LynxNova")
+AeroMesh = NodePath("../Aeromorph")
+charLight = NodePath("../OmniLight3D")
 character = NodePath("..")
 edge_spring_arm = NodePath("EdgeSpringArm3D")
 rear_spring_arm = NodePath("EdgeSpringArm3D/RearSpringArm3D")

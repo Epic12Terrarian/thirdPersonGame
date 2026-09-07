@@ -1,5 +1,12 @@
 extends Node3D
 
+@export var LynxMesh = MeshInstance3D
+@export var AeroMesh = MeshInstance3D
+
+@export var charLight: OmniLight3D
+enum PlayerCharacter {Lynx = 0, Aeromorph = 1}
+var player: int = PlayerCharacter.Lynx
+
 @export var character: CharacterBody3D
 @export var edge_spring_arm: SpringArm3D
 @export var rear_spring_arm: SpringArm3D
@@ -32,6 +39,10 @@ var current_camera_alignment: int = CameraAlignment.RIGHT
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	swap_characters()
+	
+
 
 
 func _input(event: InputEvent) -> void:
@@ -59,6 +70,26 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_released("aim"):
 		exit_aim()
+	
+	if event.is_action_pressed("model_swap"):
+		match player:
+			PlayerCharacter.Lynx:
+				player = PlayerCharacter.Aeromorph
+			PlayerCharacter.Aeromorph:
+				player = PlayerCharacter.Lynx
+		swap_characters()
+		
+
+func swap_characters() -> void:
+	match player:
+			PlayerCharacter.Lynx:
+				charLight.omni_range = 5.5
+				LynxMesh.visible = true
+				AeroMesh.visible = false
+			PlayerCharacter.Aeromorph:
+				charLight.omni_range = 0
+				LynxMesh.visible = false
+				AeroMesh.visible = true
 
 
 func camera_look(mouse_movement: Vector2) -> void:
