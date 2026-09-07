@@ -15,6 +15,7 @@ margin = 0.01
 radius = 0.1
 
 [node name="Player" type="CharacterBody3D" unique_id=437376776]
+collision_layer = 2
 script = ExtResource("1_oul6g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=561094931]
@@ -24,11 +25,13 @@ shape = SubResource("CapsuleShape3D_sh265")
 transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, 0, -0.90204513, 0)
 mesh = ExtResource("2_g1dw6")
 
-[node name="camera" type="Node3D" parent="." unique_id=591680049 node_paths=PackedStringArray("character", "edge_spring_arm")]
+[node name="camera" type="Node3D" parent="." unique_id=591680049 node_paths=PackedStringArray("character", "edge_spring_arm", "rear_spring_arm", "camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516, 0.144)
 script = ExtResource("2_rkbax")
 character = NodePath("..")
 edge_spring_arm = NodePath("EdgeSpringArm3D")
+rear_spring_arm = NodePath("EdgeSpringArm3D/RearSpringArm3D")
+camera = NodePath("EdgeSpringArm3D/RearSpringArm3D/Camera3D")
 
 [node name="EdgeSpringArm3D" type="SpringArm3D" parent="camera" unique_id=2118331380]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
