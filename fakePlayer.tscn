@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cariy3lt2m1fh"]
+
+[ext_resource type="ArrayMesh" uid="uid://ctl6c5nqw0fwh" path="res://player/LynxNova.obj" id="1_3sd05"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3uwli"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1827998086]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1875705536]
+shape = SubResource("CapsuleShape3D_3uwli")
+
+[node name="LynxNova2" type="MeshInstance3D" parent="." unique_id=891881890]
+transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, 0, -0.90204513, 0)
+mesh = ExtResource("1_3sd05")

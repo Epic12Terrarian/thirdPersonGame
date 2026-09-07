@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://hmm2uktxsygi"]
 
 [ext_resource type="Material" uid="uid://deyjayd7v4trd" path="res://assets/kenney_prototype-textures/protoPurple.tres" id="1_0wu6l"]
+[ext_resource type="PackedScene" uid="uid://cariy3lt2m1fh" path="res://fakePlayer.tscn" id="1_ixsrm"]
 [ext_resource type="PackedScene" uid="uid://bkiayhclwm1r0" path="res://player/player.tscn" id="2_hy70m"]
+[ext_resource type="PackedScene" uid="uid://bde5r61ghq5gf" path="res://box.tscn" id="4_e14s6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hy70m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,6 +18,9 @@ sky = SubResource("Sky_ixsrm")
 tonemap_mode = 2
 
 [node name="world" type="Node3D" unique_id=1088856976]
+
+[node name="CharacterBody3D" parent="." unique_id=1827998086 instance=ExtResource("1_ixsrm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8881612, -3.742589)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=808085213]
 environment = SubResource("Environment_e14s6")
@@ -40,3 +45,9 @@ material = ExtResource("1_0wu6l")
 
 [node name="Player" parent="." unique_id=437376776 instance=ExtResource("2_hy70m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6343062, 0)
+
+[node name="Box1" parent="." unique_id=1234555144 instance=ExtResource("4_e14s6")]
+transform = Transform3D(1, 0, 0, 0, 0.64538115, -5.0340524, 0, 0.37506622, 8.662156, 8.561336, 1.7654467, 2.4277449)
+
+[node name="Box2" parent="." unique_id=1808677052 instance=ExtResource("4_e14s6")]
+transform = Transform3D(6.806571, 0, 0, 0, 5.346573, 0, 0, 0, 6.1654043, 6.811967, 1.9218369, -4.7967057)
