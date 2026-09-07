@@ -19,6 +19,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var mouse_event: Vector2 = event.screen_relative * mouse_sensitivity
 		camera_look(mouse_event)
+	
+	if event.is_action_pressed("aim"):
+		pass
+	
+	if event.is_action_released("aim"):
+		pass
 
 
 func camera_look(mouse_movement: Vector2) -> void:
@@ -31,3 +37,7 @@ func camera_look(mouse_movement: Vector2) -> void:
 	rotate_object_local(Vector3(1,0,0), -camera_rotation.y)
 	
 	camera_rotation.y = clamp(camera_rotation.y, -max_y_rotation, max_y_rotation)
+
+
+func enter_aim() -> void:
+	pass
