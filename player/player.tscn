@@ -4,8 +4,16 @@
 [ext_resource type="Script" uid="uid://d34udxixyd48w" path="res://player/camera.gd" id="2_rkbax"]
 [ext_resource type="ArrayMesh" uid="uid://ctl6c5nqw0fwh" path="res://player/models/LynxNova.obj" id="2_yw30f"]
 [ext_resource type="ArrayMesh" uid="uid://c62f8yftlwh15" path="res://player/models/aeromorph.obj" id="4_yw30f"]
+[ext_resource type="Script" uid="uid://3icr7u2pfubs" path="res://player/state_machine/player_state_machine/player_state_machine.gd" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://ywvplr0fibio" path="res://player/state_machine/player_state_machine/states/idle.gd" id="6_g6k8r"]
+[ext_resource type="Script" uid="uid://hi36a08begh5" path="res://player/state_machine/player_state_machine/states/run.gd" id="7_hg6s5"]
+[ext_resource type="Script" uid="uid://bal7e3035864m" path="res://player/state_machine/player_state_machine/states/sprint.gd" id="8_8t03j"]
+[ext_resource type="Script" uid="uid://bespj2lbw1mr4" path="res://player/state_machine/player_state_machine/states/aim.gd" id="9_2ieo8"]
+[ext_resource type="Script" uid="uid://dv6e8ibenetgp" path="res://player/state_machine/player_state_machine/states/airborne.gd" id="10_8t03j"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oyhfb"]
+radius = 0.4
+height = 1.8901367
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g1dw6"]
 margin = 0.01
@@ -17,6 +25,7 @@ radius = 0.1
 
 [node name="Player" type="CharacterBody3D" unique_id=437376776]
 collision_layer = 2
+floor_constant_speed = true
 script = ExtResource("1_oul6g")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1341272765]
@@ -24,7 +33,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5744895, 0)
 omni_range = 5.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=561094931]
-shape = SubResource("CapsuleShape3D_sh265")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16009521, 0)
+shape = SubResource("CapsuleShape3D_oyhfb")
 
 [node name="LynxNova" type="MeshInstance3D" parent="." unique_id=2104786510]
 transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, 0, -0.90204513, 0)
@@ -56,3 +66,22 @@ shape = SubResource("SphereShape3D_rkbax")
 spring_length = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="camera/EdgeSpringArm3D/RearSpringArm3D" unique_id=1183764036]
+
+[node name="StateMachines" type="Node" parent="." unique_id=879889618 node_paths=PackedStringArray("start_state")]
+script = ExtResource("5_qjkh3")
+start_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachines" unique_id=645707080]
+script = ExtResource("6_g6k8r")
+
+[node name="Run" type="Node" parent="StateMachines" unique_id=57361447]
+script = ExtResource("7_hg6s5")
+
+[node name="Sprint" type="Node" parent="StateMachines" unique_id=1723301032]
+script = ExtResource("8_8t03j")
+
+[node name="Aim" type="Node" parent="StateMachines" unique_id=1780353978]
+script = ExtResource("9_2ieo8")
+
+[node name="Airborne" type="Node" parent="StateMachines" unique_id=1564850581]
+script = ExtResource("10_8t03j")
