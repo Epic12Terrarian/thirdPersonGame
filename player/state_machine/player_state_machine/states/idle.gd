@@ -2,6 +2,7 @@ extends Motion
 
 func _enter() -> void:
 	print(name)
+	animation_state_change.emit("idle")
 	last_state = name
 	velocity.y = 0
 
@@ -11,10 +12,10 @@ func _state_input(_event: InputEvent) -> void:
 
 func _update(_delta: float) -> void:
 	set_direction()
-	calculate_velocity(SPEED, direction, _delta)
+	calculate_velocity(stats.speed, direction, _delta)
 	
-	if stamina <= MAX_STAMINA:
-		stamina += _delta / IDLE_STAMINA_REGEN_MODIFIER
+	if stamina <= stats.max_stamina:
+		stamina += _delta / stats.idle_stamina_regen_modifier
 	
 	if !is_on_floor():
 		finished.emit("airborne")

@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://bkiayhclwm1r0"]
 
 [ext_resource type="Script" uid="uid://25nq16q60ngc" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="PackedScene" uid="uid://vhc3j04735gu" path="res://player/models/lynx_model.tscn" id="2_kb6p2"]
 [ext_resource type="Script" uid="uid://d34udxixyd48w" path="res://player/camera.gd" id="2_rkbax"]
-[ext_resource type="ArrayMesh" uid="uid://ctl6c5nqw0fwh" path="res://player/models/LynxNova.obj" id="2_yw30f"]
 [ext_resource type="ArrayMesh" uid="uid://c62f8yftlwh15" path="res://player/models/aeromorph.obj" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://3icr7u2pfubs" path="res://player/state_machine/player_state_machine/player_state_machine.gd" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://ywvplr0fibio" path="res://player/state_machine/player_state_machine/states/idle.gd" id="6_g6k8r"]
+[ext_resource type="Resource" uid="uid://bs16xrg6ese6c" path="res://player/player_movement_stats.tres" id="6_kb6p2"]
 [ext_resource type="Script" uid="uid://hi36a08begh5" path="res://player/state_machine/player_state_machine/states/run.gd" id="7_hg6s5"]
 [ext_resource type="Script" uid="uid://bal7e3035864m" path="res://player/state_machine/player_state_machine/states/sprint.gd" id="8_8t03j"]
 [ext_resource type="Script" uid="uid://bespj2lbw1mr4" path="res://player/state_machine/player_state_machine/states/aim_idle.gd" id="9_2ieo8"]
@@ -39,9 +40,8 @@ omni_range = 5.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16009521, 0)
 shape = SubResource("CapsuleShape3D_oyhfb")
 
-[node name="LynxNova" type="MeshInstance3D" parent="." unique_id=2104786510]
-transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, 0, -0.90204513, 0)
-mesh = ExtResource("2_yw30f")
+[node name="LynxModel" parent="." unique_id=500897315 instance=ExtResource("2_kb6p2")]
+transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, 0, -1.05, 0)
 
 [node name="Aeromorph" type="MeshInstance3D" parent="." unique_id=1964226225]
 transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, 0, -0.9937495, 0)
@@ -50,7 +50,7 @@ mesh = ExtResource("4_yw30f")
 [node name="camera" type="Node3D" parent="." unique_id=591680049 node_paths=PackedStringArray("LynxMesh", "AeroMesh", "charLight", "character", "edge_spring_arm", "rear_spring_arm", "camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516, 0.144)
 script = ExtResource("2_rkbax")
-LynxMesh = NodePath("../LynxNova")
+LynxMesh = NodePath("../LynxModel")
 AeroMesh = NodePath("../Aeromorph")
 charLight = NodePath("../OmniLight3D")
 character = NodePath("..")
@@ -61,7 +61,7 @@ camera = NodePath("EdgeSpringArm3D/RearSpringArm3D/Camera3D")
 [node name="EdgeSpringArm3D" type="SpringArm3D" parent="camera" unique_id=2118331380]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 shape = SubResource("SphereShape3D_g1dw6")
-spring_length = 0.5
+spring_length = 0.75
 
 [node name="RearSpringArm3D" type="SpringArm3D" parent="camera/EdgeSpringArm3D" unique_id=1405918412]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.4901161e-08, 0, 0.23855782)
@@ -70,8 +70,10 @@ spring_length = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="camera/EdgeSpringArm3D/RearSpringArm3D" unique_id=1183764036]
 
-[node name="StateMachines" type="Node" parent="." unique_id=879889618 node_paths=PackedStringArray("start_state")]
+[node name="StateMachines" type="Node" parent="." unique_id=879889618 node_paths=PackedStringArray("lynx_model", "start_state")]
 script = ExtResource("5_qjkh3")
+player_movement_stats = ExtResource("6_kb6p2")
+lynx_model = NodePath("../LynxModel")
 start_state = NodePath("idle")
 
 [node name="idle" type="Node" parent="StateMachines" unique_id=645707080]

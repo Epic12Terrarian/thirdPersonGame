@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var LynxMesh = MeshInstance3D
+@export var LynxMesh = Node3D
 @export var AeroMesh = MeshInstance3D
 
 @export var charLight: OmniLight3D
@@ -14,7 +14,7 @@ var player: int = PlayerCharacter.Lynx
 
 @export var camera_alignment_speed: float = 0.5
 @export var aim_rear_spring_length: float = 0.5
-@export var aim_edge_spring_length: float = 0.3
+@export var aim_edge_spring_length: float = 0.45
 @export var aim_speed: float = 0.2
 @export var aim_fov: float = 55
 

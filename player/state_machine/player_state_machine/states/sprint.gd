@@ -2,6 +2,7 @@ extends Motion
 
 func _enter() -> void:
 	print(name)
+	animation_state_change.emit("sprint")
 	last_state = name
 	velocity.y = 0
 	camera.enter_sprint()
@@ -21,7 +22,7 @@ func _state_input(_event: InputEvent) -> void:
 
 func _update(_delta: float) -> void:
 	set_direction()
-	calculate_velocity(SPRINT_SPEED, direction, _delta)
+	calculate_velocity(stats.sprint_speed, direction, _delta)
 	
 	stamina -= _delta
 	
