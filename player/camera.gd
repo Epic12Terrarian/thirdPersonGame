@@ -6,6 +6,7 @@ extends Node3D
 @export var charLight: OmniLight3D
 enum PlayerCharacter {Lynx = 0, Aeromorph = 1}
 var player: int = PlayerCharacter.Lynx
+var player_char: String = "Lynx"
 
 @export var character: CharacterBody3D
 @export var edge_spring_arm: SpringArm3D
@@ -80,13 +81,23 @@ func _input(event: InputEvent) -> void:
 		swap_characters()
 		
 
+func model_swap() -> void:
+	match player:
+		PlayerCharacter.Lynx:
+			player = PlayerCharacter.Aeromorph
+		PlayerCharacter.Aeromorph:
+			player = PlayerCharacter.Lynx
+	swap_characters()
+
 func swap_characters() -> void:
 	match player:
 			PlayerCharacter.Lynx:
+				player_char = "Lynx"
 				charLight.omni_range = 5.5
 				LynxMesh.visible = true
 				AeroMesh.visible = false
 			PlayerCharacter.Aeromorph:
+				player_char = "Aero"
 				charLight.omni_range = 0
 				LynxMesh.visible = false
 				AeroMesh.visible = true
