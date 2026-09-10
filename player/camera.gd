@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var LynxMesh = Node3D
-@export var AeroMesh = MeshInstance3D
+@export var AeroMesh = Node3D
 
 @export var charLight: OmniLight3D
 enum PlayerCharacter {Lynx = 0, Aeromorph = 1}

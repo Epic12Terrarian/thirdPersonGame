@@ -1,5 +1,5 @@
 extends Node3D
-class_name LynxModel
+class_name AeromorphModel
 
 @export var animation_tree: AnimationTree
 

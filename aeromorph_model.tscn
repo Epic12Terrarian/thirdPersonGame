@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://ctr23c4hdcujf"]
+
+[ext_resource type="PackedScene" uid="uid://cwdhradjoftnw" path="res://player/models/aeromorphMiximoRig.fbx" id="1_aii7i"]
+[ext_resource type="Script" uid="uid://lvvvyuhdy724" path="res://aeromorph_model.gd" id="1_kkwcb"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kkwcb"]
+animation = &"aimIdle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rbfol"]
+animation = &"aimWalk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yy7we"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_14ccr"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_53yj6"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ynu11"]
+animation = &"sprint"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_yej3k"]
+xfade_time = 0.2
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "aimIdle"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+input_3/name = "aimWalk"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+input_4/name = "fall"
+input_4/auto_advance = false
+input_4/break_loop_at_end = false
+input_4/reset = true
+input_5/name = "sprint"
+input_5/auto_advance = false
+input_5/break_loop_at_end = false
+input_5/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_3xd07"]
+graph_offset = Vector2(-256.26843, -46.020294)
+nodes/output/position = Vector2(1040, 120)
+nodes/aimIdle/node = SubResource("AnimationNodeAnimation_kkwcb")
+nodes/aimIdle/position = Vector2(260, 40)
+nodes/aimWalk/node = SubResource("AnimationNodeAnimation_rbfol")
+nodes/aimWalk/position = Vector2(420, 40)
+nodes/fall/node = SubResource("AnimationNodeAnimation_yy7we")
+nodes/fall/position = Vector2(580, 40)
+nodes/idle/node = SubResource("AnimationNodeAnimation_14ccr")
+nodes/idle/position = Vector2(240, 240)
+nodes/run/node = SubResource("AnimationNodeAnimation_53yj6")
+nodes/run/position = Vector2(400, 220)
+nodes/sprint/node = SubResource("AnimationNodeAnimation_ynu11")
+nodes/sprint/position = Vector2(560, 220)
+nodes/unarmed_movement/node = SubResource("AnimationNodeTransition_yej3k")
+nodes/unarmed_movement/position = Vector2(800, 20)
+node_connections = [&"output", 0, &"unarmed_movement", &"unarmed_movement", 0, &"idle", &"unarmed_movement", 1, &"run", &"unarmed_movement", 2, &"aimIdle", &"unarmed_movement", 3, &"aimWalk", &"unarmed_movement", 4, &"fall", &"unarmed_movement", 5, &"sprint"]
+
+[node name="aeromorph_model" type="Node3D" unique_id=1510999957 node_paths=PackedStringArray("animation_tree")]
+script = ExtResource("1_kkwcb")
+animation_tree = NodePath("AnimationTree")
+
+[node name="aeromorphMiximoRig" parent="." unique_id=1832799346 instance=ExtResource("1_aii7i")]
+
+[node name="Skeleton3D" parent="aeromorphMiximoRig/Armature" parent_id_path=PackedInt32Array(1832799346, 1414355703) index="0" unique_id=2115585597]
+bones/0/position = Vector3(-0.043972284, 1.4021635, -0.017470682)
+bones/0/rotation = Quaternion(-0.038635407, 0.39896566, 0.015959736, 0.9160126)
+bones/1/rotation = Quaternion(0.05674377, 0.039968807, -0.0065330905, 0.9975671)
+bones/2/rotation = Quaternion(0.09649181, 0.08001042, -0.018693166, 0.9919366)
+bones/3/rotation = Quaternion(0.0964529, 0.080071084, -0.01871971, 0.991935)
+bones/4/rotation = Quaternion(-0.027511278, -0.010863374, 0.0022728269, 0.99955994)
+bones/5/rotation = Quaternion(-0.03697779, 0.176521, -0.0062312926, 0.9835824)
+bones/8/rotation = Quaternion(0.58005816, 0.42050546, -0.57158726, 0.3999947)
+bones/9/rotation = Quaternion(0.58443326, -0.10604665, 0.06181199, 0.8021043)
+bones/10/rotation = Quaternion(-0.05574203, 0.080334686, 0.4000619, 0.9112572)
+bones/11/rotation = Quaternion(-0.080881454, 0.13632166, 0.026862923, 0.9869919)
+bones/12/rotation = Quaternion(0.12602223, -0.01230664, 0.05482558, 0.9904348)
+bones/13/rotation = Quaternion(0.15185443, -0.01765465, 0.009047454, 0.98820376)
+bones/14/rotation = Quaternion(-3.5157438e-08, 6.4028444e-10, -6.332995e-08, 1)
+bones/17/rotation = Quaternion(0.6279577, -0.37627164, 0.5323285, 0.42510617)
+bones/18/rotation = Quaternion(0.5616295, 0.06846905, 0.17513667, 0.8057367)
+bones/19/rotation = Quaternion(0.0094651105, -0.0060585425, -0.3572387, 0.93394554)
+bones/20/rotation = Quaternion(0.10554138, -0.053977575, -0.10751797, 0.9871107)
+bones/21/rotation = Quaternion(-0.06907045, 0.005234375, 0.08342782, 0.99410355)
+bones/22/rotation = Quaternion(0.14730124, -0.0035713639, 0.00432497, 0.9890758)
+bones/23/rotation = Quaternion(-8.558854e-07, 3.1944361e-07, 2.2351745e-07, 1)
+bones/26/rotation = Quaternion(0.080898754, 0.19276018, 0.9717326, -0.109702244)
+bones/27/rotation = Quaternion(-0.32614565, 0.12353871, -0.045326922, 0.9361158)
+bones/28/rotation = Quaternion(0.46452227, -0.14463282, -0.012026326, 0.8735879)
+bones/29/rotation = Quaternion(0.35724214, -0.25447112, 0.0722252, 0.89577127)
+bones/32/rotation = Quaternion(-0.12957118, -0.03378308, 0.9826287, 0.12849456)
+bones/33/rotation = Quaternion(-0.29511634, 0.066504076, -0.013436285, 0.9530494)
+bones/34/rotation = Quaternion(0.5284601, 0.21747513, 0.1319921, 0.80994606)
+bones/35/rotation = Quaternion(0.38016647, 0.2112608, -0.07883138, 0.89701056)
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1363485302]
+root_node = NodePath("../aeromorphMiximoRig")
+tree_root = SubResource("AnimationNodeBlendTree_3xd07")
+anim_player = NodePath("../aeromorphMiximoRig/AnimationPlayer")
+parameters/unarmed_movement/current_state = "idle"
+parameters/unarmed_movement/transition_request = ""
+parameters/unarmed_movement/current_index = 0
+
+[editable path="aeromorphMiximoRig"]

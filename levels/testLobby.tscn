@@ -44,7 +44,7 @@ size = Vector3(50, 35.07257, 50)
 material = ExtResource("1_0wu6l")
 
 [node name="Player" parent="." unique_id=437376776 instance=ExtResource("2_hy70m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92922604, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8702127, 0)
 
 [node name="Box1" parent="." unique_id=1234555144 instance=ExtResource("4_e14s6")]
 transform = Transform3D(1, 0, 0, 0, 0.64538115, -5.0340524, 0, 0.37506622, 8.662156, 8.561336, 1.7654467, 2.4277449)

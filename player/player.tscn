@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://25nq16q60ngc" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://vhc3j04735gu" path="res://player/models/lynx_model.tscn" id="2_kb6p2"]
 [ext_resource type="Script" uid="uid://d34udxixyd48w" path="res://player/camera.gd" id="2_rkbax"]
-[ext_resource type="ArrayMesh" uid="uid://c62f8yftlwh15" path="res://player/models/aeromorph.obj" id="4_yw30f"]
+[ext_resource type="PackedScene" uid="uid://ctr23c4hdcujf" path="res://aeromorph_model.tscn" id="3_kb6p2"]
 [ext_resource type="Script" uid="uid://3icr7u2pfubs" path="res://player/state_machine/player_state_machine/player_state_machine.gd" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://ywvplr0fibio" path="res://player/state_machine/player_state_machine/states/idle.gd" id="6_g6k8r"]
 [ext_resource type="Resource" uid="uid://bs16xrg6ese6c" path="res://player/player_movement_stats.tres" id="6_kb6p2"]
@@ -43,15 +43,14 @@ shape = SubResource("CapsuleShape3D_oyhfb")
 [node name="LynxModel" parent="." unique_id=500897315 instance=ExtResource("2_kb6p2")]
 transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, 0, -1.05, 0)
 
-[node name="Aeromorph" type="MeshInstance3D" parent="." unique_id=1964226225]
-transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, 0, -0.9937495, 0)
-mesh = ExtResource("4_yw30f")
+[node name="aeromorph_model" parent="." unique_id=1510999957 instance=ExtResource("3_kb6p2")]
+transform = Transform3D(-2.8412401e-08, 0, 0.65, 0, 0.65, 0, -0.65, 0, -2.8412401e-08, 0, -1.05, 0)
 
 [node name="camera" type="Node3D" parent="." unique_id=591680049 node_paths=PackedStringArray("LynxMesh", "AeroMesh", "charLight", "character", "edge_spring_arm", "rear_spring_arm", "camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516, 0.144)
 script = ExtResource("2_rkbax")
 LynxMesh = NodePath("../LynxModel")
-AeroMesh = NodePath("../Aeromorph")
+AeroMesh = NodePath("../aeromorph_model")
 charLight = NodePath("../OmniLight3D")
 character = NodePath("..")
 edge_spring_arm = NodePath("EdgeSpringArm3D")
@@ -70,10 +69,11 @@ spring_length = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="camera/EdgeSpringArm3D/RearSpringArm3D" unique_id=1183764036]
 
-[node name="StateMachines" type="Node" parent="." unique_id=879889618 node_paths=PackedStringArray("lynx_model", "start_state")]
+[node name="StateMachines" type="Node" parent="." unique_id=879889618 node_paths=PackedStringArray("lynx_model", "aeromorph_model", "start_state")]
 script = ExtResource("5_qjkh3")
 player_movement_stats = ExtResource("6_kb6p2")
 lynx_model = NodePath("../LynxModel")
+aeromorph_model = NodePath("../aeromorph_model")
 start_state = NodePath("idle")
 
 [node name="idle" type="Node" parent="StateMachines" unique_id=645707080]
@@ -104,10 +104,10 @@ offset_bottom = 39.0
 text = "Current State: "
 
 [node name="SprintLabel" type="Label" parent="UI" unique_id=512585072]
-offset_left = 49.0
-offset_top = 563.0
-offset_right = 164.0
-offset_bottom = 596.0
+offset_left = 16.0
+offset_top = 376.0
+offset_right = 131.0
+offset_bottom = 409.0
 text = "Sprint: 0"
 
 [node name="motionVarAccess" type="Node" parent="UI" unique_id=2056448968]
@@ -115,10 +115,10 @@ script = ExtResource("11_2ieo8")
 
 [node name="crosshairTemp" type="Label" parent="UI" unique_id=745103718]
 visible = false
-offset_left = 576.0
-offset_top = 296.0
-offset_right = 616.0
-offset_bottom = 319.0
+offset_left = 344.0
+offset_top = 200.0
+offset_right = 384.0
+offset_bottom = 223.0
 text = "o"
 
 [node name="pause_menu" type="Node2D" parent="UI" unique_id=101706651]
@@ -132,34 +132,34 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 520.0
-offset_top = 448.0
-offset_right = 592.0
-offset_bottom = 479.0
+offset_left = 192.0
+offset_top = 224.0
+offset_right = 264.0
+offset_bottom = 255.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "RESUME"
 
 [node name="quit" type="Button" parent="UI/pause_menu" unique_id=1171859550]
-offset_left = 520.0
-offset_top = 384.0
-offset_right = 567.0
-offset_bottom = 415.0
+offset_left = 192.0
+offset_top = 184.0
+offset_right = 239.0
+offset_bottom = 215.0
 text = "QUIT"
 
 [node name="toggle_sprint" type="Button" parent="UI/pause_menu" unique_id=1050862454]
-offset_left = 448.0
-offset_top = 128.0
-offset_right = 586.0
-offset_bottom = 159.0
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 330.0
+offset_bottom = 95.0
 text = "TOGGLE_SPRINT: 
 "
 
 [node name="toggle_aim" type="Button" parent="UI/pause_menu" unique_id=226890882]
-offset_left = 448.0
-offset_top = 64.0
-offset_right = 565.0
-offset_bottom = 95.0
+offset_left = 192.0
+offset_top = 24.0
+offset_right = 309.0
+offset_bottom = 55.0
 text = "TOGGLE_AIM: "
 
 [connection signal="pressed" from="UI/pause_menu/resume_Button" to="UI/pause_menu" method="unpause"]
