@@ -1,16 +1,36 @@
 extends State
 class_name Motion
 
+@onready var camera = $"../../camera"
+
 signal velocity_updated(vel: Vector3)
+signal paused(vel: bool)
 
 const SPEED: float = 3.5
-const JUMP_VELOCITY: float = 4.5
-const GRAVITY: float = -9.8
+const SPRINT_SPEED: float = 3.0
+const AIM_SPEED: float = 2.0
+const GRAVITY: float = -15
 const ACCELERATION: float = 1000
+const MAX_STAMINA: float = 5
+const IDLE_STAMINA_REGEN_MODIFIER = 1
+const RUN_STAMINA_REGEN_MODIFIER = 2
+
+static var toggle_sprint : bool = true
+static var toggle_aim : bool = false
+static var last_state : String = "hi"
+static var last_velocity : Vector3 = Vector3.ZERO
+static var last_direction : Vector3 = Vector3.ZERO
 
 static var input_direction : Vector2 = Vector2.ZERO
 static var direction : Vector3 = Vector3.ZERO
 static var velocity : Vector3 = Vector3.ZERO
+static var stamina : float = 0
+
+func pause() -> void:
+	paused.emit(true)
+
+func unpause() -> void:
+	paused.emit(false)
 
 func _ready() -> void:
 	velocity_updated.connect(owner.set_velocity_from_motion)
@@ -27,3 +47,6 @@ func calculate_velocity(_speed: float, _direction: Vector3, delta: float) -> voi
 func calculate_gravity(delta: float) -> void:
 	if not owner.is_on_floor():
 		velocity.y += GRAVITY * delta
+
+func is_on_floor() -> bool:
+	return owner.is_on_floor()

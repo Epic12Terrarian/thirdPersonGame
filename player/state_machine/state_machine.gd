@@ -26,6 +26,7 @@ func _create_state_map() -> void:
 func _initialize(state: State) -> void:
 	current_state = state
 	current_state._enter()
+	_set_active(true) #remove this later when adding menus and whatnot
 
 func _set_active(value: bool) -> void:
 	_active = value

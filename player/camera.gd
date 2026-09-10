@@ -46,11 +46,11 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#if event.is_action_pressed("ui_cancel"):
+	#	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	#		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#	else:
+	#		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 	if event is InputEventMouseMotion:
 		var mouse_event: Vector2 = event.screen_relative * mouse_sensitivity
@@ -59,17 +59,17 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("swap_camera_alignment"):
 		swap_camera_alignment()
 		
-	if event.is_action_pressed("sprint"):
-		enter_sprint()
+	#if event.is_action_pressed("sprint"):
+	#	enter_sprint()
 	
-	if event.is_action_released("sprint"):
-		exit_sprint()
+	#if event.is_action_released("sprint"):
+	#	exit_sprint()
 
-	if event.is_action_pressed("aim"):
-		enter_aim()
+	#if event.is_action_pressed("aim"):
+	#	enter_aim()
 	
-	if event.is_action_released("aim"):
-		exit_aim()
+	#if event.is_action_released("aim"):
+	#	exit_aim()
 	
 	if event.is_action_pressed("model_swap"):
 		match player:

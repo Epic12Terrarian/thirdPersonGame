@@ -8,8 +8,11 @@
 [ext_resource type="Script" uid="uid://ywvplr0fibio" path="res://player/state_machine/player_state_machine/states/idle.gd" id="6_g6k8r"]
 [ext_resource type="Script" uid="uid://hi36a08begh5" path="res://player/state_machine/player_state_machine/states/run.gd" id="7_hg6s5"]
 [ext_resource type="Script" uid="uid://bal7e3035864m" path="res://player/state_machine/player_state_machine/states/sprint.gd" id="8_8t03j"]
-[ext_resource type="Script" uid="uid://bespj2lbw1mr4" path="res://player/state_machine/player_state_machine/states/aim.gd" id="9_2ieo8"]
+[ext_resource type="Script" uid="uid://bespj2lbw1mr4" path="res://player/state_machine/player_state_machine/states/aim_idle.gd" id="9_2ieo8"]
 [ext_resource type="Script" uid="uid://dv6e8ibenetgp" path="res://player/state_machine/player_state_machine/states/airborne.gd" id="10_8t03j"]
+[ext_resource type="Script" uid="uid://0lwnmkhh5l74" path="res://player/motionVarAccess.gd" id="11_2ieo8"]
+[ext_resource type="Script" uid="uid://dj048jqg6h2y" path="res://player/state_machine/player_state_machine/states/aim_run.gd" id="11_ebec5"]
+[ext_resource type="Script" uid="uid://u1ypljip4y46" path="res://player/pause_menu.gd" id="14_kb6p2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oyhfb"]
 radius = 0.4
@@ -69,19 +72,95 @@ spring_length = 1.5
 
 [node name="StateMachines" type="Node" parent="." unique_id=879889618 node_paths=PackedStringArray("start_state")]
 script = ExtResource("5_qjkh3")
-start_state = NodePath("Idle")
+start_state = NodePath("idle")
 
-[node name="Idle" type="Node" parent="StateMachines" unique_id=645707080]
+[node name="idle" type="Node" parent="StateMachines" unique_id=645707080]
 script = ExtResource("6_g6k8r")
 
-[node name="Run" type="Node" parent="StateMachines" unique_id=57361447]
+[node name="run" type="Node" parent="StateMachines" unique_id=57361447]
 script = ExtResource("7_hg6s5")
 
-[node name="Sprint" type="Node" parent="StateMachines" unique_id=1723301032]
+[node name="sprint" type="Node" parent="StateMachines" unique_id=1723301032]
 script = ExtResource("8_8t03j")
 
-[node name="Aim" type="Node" parent="StateMachines" unique_id=1780353978]
+[node name="aim_idle" type="Node" parent="StateMachines" unique_id=1780353978]
 script = ExtResource("9_2ieo8")
 
-[node name="Airborne" type="Node" parent="StateMachines" unique_id=1564850581]
+[node name="airborne" type="Node" parent="StateMachines" unique_id=1564850581]
 script = ExtResource("10_8t03j")
+
+[node name="aim_run" type="Node" parent="StateMachines" unique_id=1618391347]
+script = ExtResource("11_ebec5")
+
+[node name="UI" type="Node2D" parent="." unique_id=2017253553]
+
+[node name="current_state" type="Label" parent="UI" unique_id=545871780]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 129.0
+offset_bottom = 39.0
+text = "Current State: "
+
+[node name="SprintLabel" type="Label" parent="UI" unique_id=512585072]
+offset_left = 49.0
+offset_top = 563.0
+offset_right = 164.0
+offset_bottom = 596.0
+text = "Sprint: 0"
+
+[node name="motionVarAccess" type="Node" parent="UI" unique_id=2056448968]
+script = ExtResource("11_2ieo8")
+
+[node name="crosshairTemp" type="Label" parent="UI" unique_id=745103718]
+visible = false
+offset_left = 576.0
+offset_top = 296.0
+offset_right = 616.0
+offset_bottom = 319.0
+text = "o"
+
+[node name="pause_menu" type="Node2D" parent="UI" unique_id=101706651]
+process_mode = 3
+visible = false
+script = ExtResource("14_kb6p2")
+
+[node name="resume_Button" type="Button" parent="UI/pause_menu" unique_id=999367569]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 520.0
+offset_top = 448.0
+offset_right = 592.0
+offset_bottom = 479.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "RESUME"
+
+[node name="quit" type="Button" parent="UI/pause_menu" unique_id=1171859550]
+offset_left = 520.0
+offset_top = 384.0
+offset_right = 567.0
+offset_bottom = 415.0
+text = "QUIT"
+
+[node name="toggle_sprint" type="Button" parent="UI/pause_menu" unique_id=1050862454]
+offset_left = 448.0
+offset_top = 128.0
+offset_right = 586.0
+offset_bottom = 159.0
+text = "TOGGLE_SPRINT: 
+"
+
+[node name="toggle_aim" type="Button" parent="UI/pause_menu" unique_id=226890882]
+offset_left = 448.0
+offset_top = 64.0
+offset_right = 565.0
+offset_bottom = 95.0
+text = "TOGGLE_AIM: "
+
+[connection signal="pressed" from="UI/pause_menu/resume_Button" to="UI/pause_menu" method="unpause"]
+[connection signal="pressed" from="UI/pause_menu/quit" to="UI/pause_menu" method="quit"]
+[connection signal="pressed" from="UI/pause_menu/toggle_sprint" to="UI/pause_menu" method="toggle_sprint"]
+[connection signal="pressed" from="UI/pause_menu/toggle_aim" to="UI/pause_menu" method="toggle_aim"]

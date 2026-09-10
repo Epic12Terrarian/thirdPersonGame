@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bde5r61ghq5gf"]
 
+[ext_resource type="Material" uid="uid://deyjayd7v4trd" path="res://assets/kenney_prototype-textures/protoPurple.tres" id="1_g2tbl"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_3xd07"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_jq8tk"]
@@ -12,4 +14,5 @@
 shape = SubResource("BoxShape3D_3xd07")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=117095681]
+material_overlay = ExtResource("1_g2tbl")
 mesh = SubResource("BoxMesh_jq8tk")
